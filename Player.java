@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Player
 {
-    private ArrayList<Player> inventory;
+    private ArrayList<Item> inventory;
     private int health;
     private Room currentRoom;
 
@@ -24,11 +24,31 @@ public class Player
     }
 
     /**
-     * 
+     * Returns the current room player is in.
      */
-    public int sampleMethod(int y)
+    public Room getRoom() {
+        return currentRoom;
+    }
+    
+    /**
+     * Searches through player's inventory, room's items, and room itself,
+     * to try to look at something.
+     */
+    public String lookAt(String target)
     {
-        // put your code here
-        return y;
+        for(Item item : inventory) {
+            if(item.getName().equalsIgnoreCase(target.trim())) {
+                return item.getDescription();
+            }
+        }
+        if(currentRoom.getName().equalsIgnoreCase(target.trim())) {
+            return currentRoom.getDescription();
+        }
+        for(Item item : currentRoom.getItems()) {
+            if(item.getName().equalsIgnoreCase(target.trim())) {
+                return item.getDescription();
+            }
+        }
+        return "I don't know what you're trying to look at...";
     }
 }
