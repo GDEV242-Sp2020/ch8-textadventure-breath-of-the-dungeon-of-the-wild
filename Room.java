@@ -1,6 +1,7 @@
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 /**
  * Class Room - a room in an adventure game.
@@ -18,9 +19,11 @@ import java.util.Iterator;
 
 public class Room 
 {
+    private String name;
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-
+    private ArrayList<Item> items;
+    
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -32,7 +35,46 @@ public class Room
         this.description = description;
         exits = new HashMap<>();
     }
-
+    
+    
+    /**
+     * Create a room described "description". Initially, it has
+     * no exits. "description" is something like "a kitchen" or
+     * "an open court yard". Also populates room with items.
+     * 
+     * @param nameOf name of room.
+     * @param description The room's description.
+     * @param itemsToAdd items contained in room.
+     */
+    public Room(String nameOf, String description, ArrayList<Item> itemsToAdd) 
+    {
+        this.description = description;
+        exits = new HashMap<>();
+        items = itemsToAdd;
+        name = nameOf;
+    }
+    
+    /**
+     * Returns name of room.
+     */
+    public String getName() {
+        return name;
+    }
+    
+    /**
+     * Returns description of room.
+     */
+    public String getDescription() {
+        return description;
+    }
+    
+    /**
+     * Returns items in the room.
+     */
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+    
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
@@ -60,9 +102,23 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return "You are " + description + ".\n"
+               + itemList() + ".\n" 
+               + getExitString();
     }
 
+    
+    /**
+     * Returns items in items as a printable string.
+     */
+    public String itemList() {
+        String itemsInside = "Items here: ";
+        for(Item item : items) {
+            itemsInside = itemsInside + item.getName() + " ";
+        }
+        return itemsInside;
+    }
+    
     /**
      * Return a string describing the room's exits, for example
      * "Exits: north west".

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,6 +21,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
@@ -27,17 +30,34 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        player = new Player(currentRoom);
     }
-
+    
+    /**
+     * Main method for the Game object.
+     */
+    public static void main(String[] cheese) {
+        Game start = new Game();
+        start.play();
+    }
+    
+    
     /**
      * Create all the rooms and link their exits together.
      */
     private void createRooms()
     {
         Room outside, theater, pub, lab, office;
-      
+        
+        ArrayList<Item> itemsToAdd = new ArrayList<Item>();
+        itemsToAdd.add(new Item("beans", "can of beans yum yum"));
+        
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
+        outside = new Room("Outside", "outside the main entrance of the" + 
+                           " university", itemsToAdd);
+                          
+        itemsToAdd = new ArrayList<Item>();
+                           
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
@@ -118,6 +138,10 @@ public class Game
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+                
+            case LOOK:
+                lookAt(command.getSecondWord());
+                break;
         }
         return wantToQuit;
     }
@@ -138,6 +162,13 @@ public class Game
         parser.showCommands();
     }
 
+    /**
+     * Look command. Gives player information about an room, item, or enemy.
+     */
+    public void lookAt(String target) {
+        System.out.println(player.lookAt(target));
+    }
+    
     /** 
      * Try to go in one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
