@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
@@ -28,7 +29,16 @@ public class Game
         createRooms();
         parser = new Parser();
     }
-
+    
+    /**
+     * Main method for the Game object.
+     */
+    public static void main(String[] cheese) {
+        Game start = new Game();
+        start.play();
+    }
+    
+    
     /**
      * Create all the rooms and link their exits together.
      */
@@ -118,6 +128,10 @@ public class Game
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+                
+            case LOOK:
+                //making a new look method
+                break;
         }
         return wantToQuit;
     }
@@ -138,6 +152,13 @@ public class Game
         parser.showCommands();
     }
 
+    /**
+     * Look command. Gives player information about an room, item, or enemy.
+     */
+    public void lookAt() {
+        //
+    }
+    
     /** 
      * Try to go in one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
