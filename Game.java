@@ -112,12 +112,16 @@ public class Game
                 break;
 
             case GO:
-                goRoom(command);
+                goRoom(  );
                 break;
 
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+            case LOOK:
+                
+                break;
+            
         }
         return wantToQuit;
     }
