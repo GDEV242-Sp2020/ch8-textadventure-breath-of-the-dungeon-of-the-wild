@@ -22,7 +22,7 @@ public class Room
     private String name;
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private ArrayList<Item> items;
+    private ItemStorage items;
     
     /**
      * Create a room described "description". Initially, it has
@@ -34,6 +34,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
+        items = new ItemStorage();
     }
     
     
@@ -46,7 +47,7 @@ public class Room
      * @param description The room's description.
      * @param itemsToAdd items contained in room.
      */
-    public Room(String nameOf, String description, ArrayList<Item> itemsToAdd) 
+    public Room(String nameOf, String description, ItemStorage itemsToAdd) 
     {
         this.description = description;
         exits = new HashMap<>();
@@ -56,6 +57,7 @@ public class Room
     
     /**
      * Returns name of room.
+     * @return name String name of item
      */
     public String getName() {
         return name;
@@ -63,6 +65,7 @@ public class Room
     
     /**
      * Returns description of room.
+     * @return description string description of item
      */
     public String getDescription() {
         return description;
@@ -70,8 +73,9 @@ public class Room
     
     /**
      * Returns items in the room.
+     * @return items of type itemStorage
      */
-    public ArrayList<Item> getItems() {
+    public ItemStorage getItemStorage() {
         return items;
     }
     
@@ -110,10 +114,11 @@ public class Room
     
     /**
      * Returns items in items as a printable string.
+     * @return itemsInside string names of items inside
      */
     public String itemList() {
         String itemsInside = "Items here: ";
-        for(Item item : items) {
+        for(Item item : items.getItems()) {
             itemsInside = itemsInside + item.getName() + " ";
         }
         return itemsInside;

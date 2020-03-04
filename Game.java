@@ -54,7 +54,7 @@ public class Game
         
         // create the rooms
         outside = new Room("Outside", "outside the main entrance of the" + 
-                           " university", itemsToAdd);
+                           " university", new ItemStorage(itemsToAdd));
                           
         itemsToAdd = new ArrayList<Item>();
                            
@@ -132,16 +132,19 @@ public class Game
                 break;
 
             case GO:
-                goRoom(  );
+                goRoom(command);
                 break;
 
             case QUIT:
                 wantToQuit = quit(command);
                 break;
-
                 
             case LOOK:
                 lookAt(command.getSecondWord());
+                break;
+                
+            case TAKE:
+                takeItem(command.getSecondWord());
                 break;
 
         }
@@ -169,6 +172,21 @@ public class Game
      */
     public void lookAt(String target) {
         System.out.println(player.lookAt(target));
+    }
+    
+    /**
+     * Takes an item out of a room and adds it into the player's inventory.
+     */
+    public void takeItem(String target)
+    {
+        Item item = player.searchFor(target);
+        if(item == null) {
+            System.out.println("I can't seem to find the item you want to take.");
+        } else {
+            currentRoom.getItemStorage().getItems().remove(item);
+            player.getItemStorage().getItems().add(item);
+            System.out.println(item.getName() + " has been added to your inventory.");
+        }
     }
     
     /** 
