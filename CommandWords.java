@@ -61,8 +61,35 @@ public class CommandWords
      */
     public void showAll() 
     {
+        System.out.println("Here are your availible commands. ");
         for(String command : validCommands.keySet()) {
-            System.out.print(command + "  ");
+            switch (command) {
+                case "help":
+                    System.out.println("Help: ");
+                    System.out.println("Help allows you to yadda yadda whatever");
+                    break;
+    
+                case "go":
+                    System.out.println("Go: ");
+                    System.out.println("Help allows you to yadda yadda whatever");
+                    break;
+    
+                case "quit":
+                    System.out.println("Quit: ");
+                    System.out.println("Help allows you to yadda yadda whatever");
+                    break;
+                    
+                case "look":
+                    System.out.println("Look: ");
+                    System.out.println("Help allows you to yadda yadda whatever");
+                    break;
+                    
+                case "take":
+                    System.out.println("Take: ");
+                    System.out.println("allows you to take an item in a room");
+                    break;
+                }
+                
         }
         System.out.println();
     }
