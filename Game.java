@@ -55,10 +55,18 @@ public class Game
         // create the rooms
         outside = new Room("Outside", "outside the main entrance of the" + 
                            " university", new ItemStorage(itemsToAdd));
+                           
+        
+                           
+                           
                           
         itemsToAdd = new ArrayList<Item>();
                            
-        theater = new Room("in a lecture theater");
+        theater = new Room("theater", "in a lecture theater");
+        
+        theater.addItem(new Item("key","opens a door"));
+        
+        
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");

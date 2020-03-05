@@ -35,4 +35,13 @@ public class ItemStorage
     public ArrayList<Item> getItems() {
         return items;
     }
+    
+    /**
+     * Adds items to the itemStorage
+     * @param item
+     */
+    public void addItem(Item item)
+    {   
+        items.add(item);
+    }
 }

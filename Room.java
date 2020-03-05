@@ -54,6 +54,31 @@ public class Room
         items = itemsToAdd;
         name = nameOf;
     }
+    /**
+     * Create a room described "description". Initially, it has
+     * no exits. "description" is something like "a kitchen" or
+     * "an open court yard". Can't directly add item in this overload.
+     * 
+     * @param nameOf name of room.
+     * @param description The room's description.
+     */
+    public Room(String nameOf, String description) 
+    {
+        this.description = description;
+        exits = new HashMap<>();
+        name = nameOf;
+    }
+    /**
+     * This will add an item to the array list of the 
+     * 
+     */
+    public void addItem(Item item)
+    {
+        items.addItem(item);
+    }
+    
+    
+    
     
     /**
      * Returns name of room.
