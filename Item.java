@@ -10,6 +10,7 @@ public class Item
 {
     private String name;
     private String description;
+    private int weight;
 
     /**
      * Constructor for Item. 
@@ -17,10 +18,11 @@ public class Item
      * @param nameOf name of room
      * @param descriptionOf description of room
      */
-    public Item(String nameOf, String descriptionOf)
+    public Item(String nameOf, String descriptionOf, int weightOf)
     {
         name = nameOf;
         description = descriptionOf;
+        weight = weightOf;
     }
 
     /**
@@ -35,5 +37,12 @@ public class Item
      */
     public String getDescription() {
         return description;
+    }
+    
+    /**
+     * Returns weight of item.
+     */
+    public int getWeight() {
+        return weight;
     }
 }

@@ -37,6 +37,7 @@ public class Player
     public ItemStorage getItemStorage() {
         return inventory;
     }
+    
     /**
      * search for an item that either the player has or it is in the room
      * @param itemName The name of the item
@@ -63,13 +64,16 @@ public class Player
      */
     public String lookAt(String target)
     {
+        if(currentRoom.getName().equalsIgnoreCase(target.trim()) || target.trim().equalsIgnoreCase("room")) {
+            return currentRoom.getLongDescription();
+        }
+        if(target.trim().equalsIgnoreCase("inventory")) {
+            return itemList();
+        }
         for(Item item : inventory.getItems()) {
             if(item.getName().equalsIgnoreCase(target.trim())) {
                 return item.getDescription();
             }
-        }
-        if(currentRoom.getName().equalsIgnoreCase(target.trim()) || target.trim().equalsIgnoreCase("room")) {
-            return currentRoom.getLongDescription();
         }
         for(Item item : currentRoom.getItemStorage().getItems()) {
             if(item.getName().equalsIgnoreCase(target.trim())) {
@@ -77,5 +81,25 @@ public class Player
             }
         }
         return "I don't know what you're trying to look at...";
+    }
+    
+    /**
+     * Returns items in iinventory as a printable string.
+     * @return itemsInside string names of items inside
+     */
+    public String itemList() {
+        String itemsInside = "Your inventory:";
+        for(Item item : inventory.getItems()) {
+            itemsInside = itemsInside + " " + item.getName();
+        }
+        return itemsInside;
+    }
+    
+    /**
+     * SetCurrentRoom method changes the room that the player is in
+     * @param room room to change player's current room to
+     */
+    public void setCurrentRoom(Room room) {
+        currentRoom = room;
     }
 }

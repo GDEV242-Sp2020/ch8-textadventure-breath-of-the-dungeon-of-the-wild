@@ -50,25 +50,24 @@ public class Game
         Room outside, theater, pub, lab, office;
         
         ArrayList<Item> itemsToAdd = new ArrayList<Item>();
-        itemsToAdd.add(new Item("beans", "can of beans yum yum"));
-        
-        // create the rooms
+        itemsToAdd.add(new Item("beans", "can of beans yum yum", 5));
         outside = new Room("Outside", "outside the main entrance of the" + 
                            " university", new ItemStorage(itemsToAdd));
-                           
         
-                           
-                           
-                          
         itemsToAdd = new ArrayList<Item>();
-                           
-        theater = new Room("theater", "in a lecture theater");
+        itemsToAdd.add(new Item("key","opens a door", 2));
+        theater = new Room("theater", "in a lecture theater",new ItemStorage(itemsToAdd));
         
-        theater.addItem(new Item("key","opens a door"));
-        
+        itemsToAdd = new ArrayList<Item>();
         
         pub = new Room("in the campus pub");
+        
+        itemsToAdd = new ArrayList<Item>();
+        
         lab = new Room("in a computing lab");
+        
+        itemsToAdd = new ArrayList<Item>();
+        
         office = new Room("in the computing admin office");
         
         // initialise room exits
@@ -169,7 +168,7 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("around the dungeon.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
@@ -179,6 +178,10 @@ public class Game
      * Look command. Gives player information about an room, item, or enemy.
      */
     public void lookAt(String target) {
+        if(target == null) {
+            target = "room";
+            //System.out.println(player.lookAt("room"));
+        }
         System.out.println(player.lookAt(target));
     }
     
@@ -219,6 +222,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
+            player.setCurrentRoom(currentRoom);
             System.out.println(currentRoom.getLongDescription());
         }
     }

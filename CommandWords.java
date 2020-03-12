@@ -61,32 +61,44 @@ public class CommandWords
      */
     public void showAll() 
     {
-        System.out.println("Here are your availible commands. ");
+        System.out.println("");
         for(String command : validCommands.keySet()) {
             switch (command) {
                 case "help":
                     System.out.println("Help: ");
-                    System.out.println("Help allows you to yadda yadda whatever");
+                    System.out.println("Help allows you to see availible commands and \n" + 
+                                       "tells you the synopsis of the game. You used \n" +
+                                       "this command to get here.\n" +
+                                       "Example- 'help'\n");
                     break;
     
                 case "go":
                     System.out.println("Go: ");
-                    System.out.println("Help allows you to yadda yadda whatever");
+                    System.out.println("Go allows you to move between rooms.\n" +
+                                       "Example- 'go north' or 'go south' \n");
                     break;
     
                 case "quit":
                     System.out.println("Quit: ");
-                    System.out.println("Help allows you to yadda yadda whatever");
+                    System.out.println("Quit allows you to quit the game.\n" +
+                                       "But like, only if you *really* need to.\n" +
+                                       "Example- 'quit'\n");
                     break;
                     
                 case "look":
                     System.out.println("Look: ");
-                    System.out.println("Help allows you to yadda yadda whatever");
+                    System.out.println("Look allows you to inspect the room that\n" +
+                                       "you are in. It also allows you to inspect\n" +
+                                       "an item that is either in the room or in \n" +
+                                       "your inventory.\n" +
+                                       "Example- 'look room' or 'look key'\n");
                     break;
                     
                 case "take":
                     System.out.println("Take: ");
-                    System.out.println("allows you to take an item in a room");
+                    System.out.println("Take allows you to take an item that is\n" +
+                                       "in the same room as your character.\n" +
+                                       "Example- 'take beans' or 'take key'\n");
                     break;
                 }
                 

@@ -68,14 +68,14 @@ public class Room
         exits = new HashMap<>();
         name = nameOf;
     }
-    /**
-     * This will add an item to the array list of the 
-     * 
-     */
-    public void addItem(Item item)
-    {
-        items.addItem(item);
-    }
+    // /**
+     // * This will add an item to the array list of the 
+     // * 
+     // */
+    // public void addItem(Item item)
+    // {
+        // items.addItem(item);
+    // }
     
     
     
@@ -142,9 +142,9 @@ public class Room
      * @return itemsInside string names of items inside
      */
     public String itemList() {
-        String itemsInside = "Items here: ";
+        String itemsInside = "Items here:";
         for(Item item : items.getItems()) {
-            itemsInside = itemsInside + item.getName() + " ";
+            itemsInside = itemsInside + " " + item.getName() ;
         }
         return itemsInside;
     }
