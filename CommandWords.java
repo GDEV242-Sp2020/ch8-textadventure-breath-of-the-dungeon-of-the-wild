@@ -91,7 +91,7 @@ public class CommandWords
                                        "you are in. It also allows you to inspect\n" +
                                        "an item that is either in the room or in \n" +
                                        "your inventory.\n" +
-                                       "Example- 'look room' or 'look key'\n");
+                                       "Example- 'look room' or 'look chainmail'\n");
                     break;
                     
                 case "take":
@@ -100,8 +100,15 @@ public class CommandWords
                                        "in the same room as your character.\n" +
                                        "Example- 'take beans' or 'take key'\n");
                     break;
-                }
+                    
+                case "use":
+                    System.out.println("Use: ");
+                    System.out.println("Use allows you to use an item that's in your \n" +
+                                       "inventory inside of the room that you're in" +
+                                       "Example- 'use cheese' or 'use mug'\n");
+                    break;
                 
+            } 
         }
         System.out.println();
     }

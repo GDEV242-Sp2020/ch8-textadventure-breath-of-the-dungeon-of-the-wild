@@ -116,17 +116,25 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println("Welcome to The Dungeon of Diners, Dragons, Drive Ins, and Dives");
+        System.out.println();
+        System.out.println("You are an adventurer, hoping to find treasure in the famed dungeon,");
+        System.out.println("which people around here usually shorten to \"The DoDDDIaD\" or just ");
+        System.out.println("\"the Dungeon.\"");
+        System.out.println();
+        System.out.println("You can always type \"help\" if you need help. Oh, and you also only ");
+        System.out.println("have ten minutes to complete this or else the Dungeon's cursed halls ");
+        System.out.println("wil devour your soul eternally. Have fun!");
+        System.out.println();
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
     }
 
     /**
      * Given a command, process (that is: execute) the command.
+     * Also checks to see if the time has run out and the game is over.
      * @param command The command to be processed.
-     * @return true If the command ends the game, false otherwise.
+     * @return true If the game is now over, false otherwise.
      */
     private boolean processCommand(Command command) 
     {
