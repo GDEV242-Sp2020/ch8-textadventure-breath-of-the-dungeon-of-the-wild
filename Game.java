@@ -22,12 +22,15 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Player player;
+    private long start;
+    private long finish;
         
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        start = System.currentTimeMillis();
         createRooms();
         parser = new Parser();
         player = new Player(currentRoom);
@@ -50,17 +53,24 @@ public class Game
         Room outside, theater, pub, lab, office;
         
         ArrayList<Item> itemsToAdd = new ArrayList<Item>();
-        itemsToAdd.add(new Item("beans", "can of beans yum yum"));
-        
-        // create the rooms
+        itemsToAdd.add(new Item("beans", "can of beans yum yum", 5));
         outside = new Room("Outside", "outside the main entrance of the" + 
-                           " university", itemsToAdd);
-                          
+                           " university", new ItemStorage(itemsToAdd));
+        
         itemsToAdd = new ArrayList<Item>();
-                           
-        theater = new Room("in a lecture theater");
+        itemsToAdd.add(new Item("key","opens a door", 2));
+        theater = new Room("theater", "in a lecture theater",new ItemStorage(itemsToAdd));
+        
+        itemsToAdd = new ArrayList<Item>();
+        
         pub = new Room("in the campus pub");
+        
+        itemsToAdd = new ArrayList<Item>();
+        
         lab = new Room("in a computing lab");
+        
+        itemsToAdd = new ArrayList<Item>();
+        
         office = new Room("in the computing admin office");
         
         // initialise room exits
@@ -95,31 +105,46 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing!"); 
+        System.out.println("Either you wanted to quit, or your time is up.");
+        System.out.println("Good bye.");
     }
-
+    
     /**
      * Print out the opening message for the player.
      */
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println("Welcome to The Dungeon of Diners, Dragons, Drive Ins, and Dives");
+        System.out.println();
+        System.out.println("You are an adventurer, hoping to find treasure in the famed dungeon,");
+        System.out.println("which people around here usually shorten to \"The DoDDDIaD\" or just ");
+        System.out.println("\"the Dungeon.\"");
+        System.out.println();
+        System.out.println("You can always type \"help\" if you need help. Oh, and you also only ");
+        System.out.println("have ten minutes to complete this or else the Dungeon's cursed halls ");
+        System.out.println("wil devour your soul eternally. Have fun!");
+        System.out.println();
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
     }
 
     /**
      * Given a command, process (that is: execute) the command.
+     * Also checks to see if the time has run out and the game is over.
      * @param command The command to be processed.
-     * @return true If the command ends the game, false otherwise.
+     * @return true If the game is now over, false otherwise.
      */
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-
+        
+        finish = System.currentTimeMillis();
+        if(start + 600000 <= finish) {
+            return true;
+        }
+        
         CommandWord commandWord = command.getCommandWord();
 
         switch (commandWord) {
@@ -142,6 +167,15 @@ public class Game
             case LOOK:
                 lookAt(command.getSecondWord());
                 break;
+                
+            case TAKE:
+                takeItem(command.getSecondWord());
+                break;
+                
+            case USE:
+                useItem(command.getSecondWord());
+                break;
+
         }
         return wantToQuit;
     }
@@ -156,17 +190,60 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("around the dungeon.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
     }
+    
+    /**
+     * Use command. If the player is able to use an item from their inventory, do so.
+     * There are only 4 use cases: 
+     * Pillow in Spike Room
+     * Key in Locked Door Room
+     * Cube in Button Room
+     * Sword in Dragon Room
+     */
+    public void useItem(String item) {
+        if(currentRoom.equals("spike room") && player.searchFor("pillow") != null) {
+            //yadda yadda yadda
+        } else if(currentRoom.equals("locked room") && player.searchFor("key") != null) {
+            //yadda yadda yadda
+        } else if(currentRoom.equals("button room") && player.searchFor("cube") != null) {
+            //yadda yadda yadda
+        } else if(currentRoom.equals("dragon lair") && player.searchFor("sword") != null) {
+            //yadda yadda yadda
+        } else {
+            System.out.println("nope, cant use this here, buckaroo");
+        }
+        
+    }
+    
 
     /**
      * Look command. Gives player information about an room, item, or enemy.
      */
     public void lookAt(String target) {
+        if(target == null) {
+            target = "room";
+            //System.out.println(player.lookAt("room"));
+        }
         System.out.println(player.lookAt(target));
+    }
+    
+    /**
+     * Takes an item out of a room and adds it into the player's inventory.
+     */
+    public void takeItem(String target)
+    {
+        Item item = player.searchFor(target);
+        if(item == null) {
+            System.out.println("I can't seem to find the item you want to take.");
+        } else {
+            currentRoom.getItemStorage().getItems().remove(item);
+            player.getItemStorage().getItems().add(item);
+            System.out.println(item.getName() + " has been added to your inventory.");
+        }
     }
     
     /** 
@@ -191,6 +268,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
+            player.setCurrentRoom(currentRoom);
             System.out.println(currentRoom.getLongDescription());
         }
     }

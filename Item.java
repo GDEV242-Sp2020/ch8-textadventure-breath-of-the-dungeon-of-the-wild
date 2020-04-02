@@ -10,6 +10,7 @@ public class Item
 {
     private String name;
     private String description;
+    private int weight;
 
     /**
      * Constructor for Item. 
@@ -17,13 +18,13 @@ public class Item
      * @param nameOf name of room
      * @param descriptionOf description of room
      */
-    public Item(String nameOf, String descriptionOf)
+    public Item(String nameOf, String descriptionOf, int weightOf)
     {
         name = nameOf;
         description = descriptionOf;
+        weight = weightOf;
     }
 
-    
     /**
      * Returns name of item.
      */
@@ -39,14 +40,9 @@ public class Item
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Returns weight of item.
      */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return y;
+    public int getWeight() {
+        return weight;
     }
 }
