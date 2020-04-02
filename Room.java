@@ -67,6 +67,7 @@ public class Room
         this.description = description;
         exits = new HashMap<>();
         name = nameOf;
+        items = new ItemStorage();
     }
     // /**
      // * This will add an item to the array list of the 
