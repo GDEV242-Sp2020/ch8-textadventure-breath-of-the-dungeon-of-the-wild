@@ -163,6 +163,10 @@ public class Game
             case TAKE:
                 takeItem(command.getSecondWord());
                 break;
+                
+            case USE:
+                useItem(command.getSecondWord());
+                break;
 
         }
         return wantToQuit;
@@ -183,6 +187,30 @@ public class Game
         System.out.println("Your command words are:");
         parser.showCommands();
     }
+    
+    /**
+     * Use command. If the player is able to use an item from their inventory, do so.
+     * There are only 4 use cases: 
+     * Pillow in Spike Room
+     * Key in Locked Door Room
+     * Cube in Button Room
+     * Sword in Dragon Room
+     */
+    public void useItem(String item) {
+        if(currentRoom.equals("spike room") && player.searchFor("pillow") != null) {
+            //yadda yadda yadda
+        } else if(currentRoom.equals("locked room") && player.searchFor("key") != null) {
+            //yadda yadda yadda
+        } else if(currentRoom.equals("button room") && player.searchFor("cube") != null) {
+            //yadda yadda yadda
+        } else if(currentRoom.equals("dragon lair") && player.searchFor("sword") != null) {
+            //yadda yadda yadda
+        } else {
+            System.out.println("nope, cant use this here, buckaroo");
+        }
+        
+    }
+    
 
     /**
      * Look command. Gives player information about an room, item, or enemy.
