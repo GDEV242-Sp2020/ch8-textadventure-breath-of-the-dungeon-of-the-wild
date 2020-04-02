@@ -22,12 +22,15 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Player player;
+    private long start;
+    private long finish;
         
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        start = System.currentTimeMillis();
         createRooms();
         parser = new Parser();
         player = new Player(currentRoom);
@@ -101,10 +104,13 @@ public class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing!"); 
+        System.out.println("Either you wanted to quit, or your time is up.");
+        System.out.println("Good bye.");
     }
-
+    
     /**
      * Print out the opening message for the player.
      */
@@ -126,7 +132,12 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-
+        
+        finish = System.currentTimeMillis();
+        if(start+6000000 >= finish) {
+            return false;
+        }
+        
         CommandWord commandWord = command.getCommandWord();
 
         switch (commandWord) {
