@@ -47,7 +47,13 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room theater, pub, lab, office;
+        
+        
+        
+        Room outside, atrium, southStair, floorLanding, cubeRoom, grandHall, heavyButton;
+        Room pillowRoom, spikeRoom, pillowKeyRoom, northStair,LockedDoor, armory;
+        Room dragoFight, treasureRoom;
         
         ArrayList<Item> itemsToAdd = new ArrayList<Item>();
         itemsToAdd.add(new Item("beans", "can of beans yum yum", 5));
