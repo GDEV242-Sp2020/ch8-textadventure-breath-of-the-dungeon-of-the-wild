@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 /**
@@ -47,8 +48,7 @@ public class Game
      */
     private void createRooms()
     {
-        Room theater, pub, lab, office;
-        
+        //Room theater, pub, lab, office;
         
         
         Room outside, atrium, southStair, floorLanding, cubeRoom, grandHall, heavyButton;
@@ -56,39 +56,35 @@ public class Game
         Room dragoFight, treasureRoom;
         
         ArrayList<Item> itemsToAdd = new ArrayList<Item>();
-        itemsToAdd.add(new Item("beans", "can of beans yum yum", 5));
+        
+        //itemsToAdd.add(new Item("beans", "can of beans yum yum", 5));
+        
         outside = new Room("Outside", "outside the main entrance of the" + 
-                           " university", new ItemStorage(itemsToAdd));
+                           " dungeon.");
+        //itemsToAdd = new ArrayList<Item>();
         
-        itemsToAdd = new ArrayList<Item>();
-        itemsToAdd.add(new Item("key","opens a door", 2));
-        theater = new Room("theater", "in a lecture theater",new ItemStorage(itemsToAdd));
+        atrium = new Room("Atrium", "Inside the dungeon you see a stairwell and a grand hall.");
         
-        itemsToAdd = new ArrayList<Item>();
+        southStair = new Room("Southern Stair Well", "There isn't anything too " 
+                + "special here, maybe some stairs i guess");
+        floorLanding = new Room("Second floor landing", "Not really much in here");
+        cubeRoom = new Room("");
         
-        pub = new Room("in the campus pub");
         
-        itemsToAdd = new ArrayList<Item>();
         
-        lab = new Room("in a computing lab");
         
-        itemsToAdd = new ArrayList<Item>();
         
-        office = new Room("in the computing admin office");
+        
+        
+        
         
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
+        outside.setExit("east", atrium);
+        
+        
+        
+        
+        
 
         currentRoom = outside;  // start game outside
     }
