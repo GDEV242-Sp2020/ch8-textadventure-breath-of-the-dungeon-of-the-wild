@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 /**
@@ -50,42 +51,110 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        //Room theater, pub, lab, office;
+        
+        
+        Room outside, atrium, southStair, floorLanding, cubeRoom, grandHall, heavyButton;
+        Room pillowRoom, spikeRoom, pillowKeyRoom, northStair,lockedDoor, armory;
+        Room dragoFight, treasureRoom;
         
         ArrayList<Item> itemsToAdd = new ArrayList<Item>();
-        itemsToAdd.add(new Item("beans", "can of beans yum yum", 5));
+        
+        //itemsToAdd.add(new Item("beans", "can of beans yum yum", 5));
+        
         outside = new Room("Outside", "outside the main entrance of the" + 
-                           " university", new ItemStorage(itemsToAdd));
+                           " dungeon.");
+        //itemsToAdd = new ArrayList<Item>();
         
+        atrium = new Room("Atrium", "Inside the dungeon you see a stairwell and a grand hall.");
+        
+        southStair = new Room("Southern Stair Well", "There isn't anything too " 
+                + "special here, maybe some stairs i guess");
+        floorLanding = new Room("Second floor landing", "Not really much in here");
+        cubeRoom = new Room("Cube Room", "This room had some sort of trap door to the left, but "
+        + " in the center there is pedistool with something on it");
+        grandHall = new Room("Grand Hall", "This room is quite grand, it appears that there are doors to the left and right");
+        
+        itemsToAdd.add(new Item("Cube", "This cube is heavier than expected", 25));
+        heavyButton = new Room("Button Room", "This room appears to have a button in the center of it."
+            + " I wonder what would happen if you put something on it", new ItemStorage(itemsToAdd));
         itemsToAdd = new ArrayList<Item>();
-        itemsToAdd.add(new Item("key","opens a door", 2));
-        theater = new Room("theater", "in a lecture theater",new ItemStorage(itemsToAdd));
         
+        pillowRoom = new Room("Pillow Room", "This room is is filled with large soft pillows");
+        spikeRoom = new Room("Spike Room", "This room has a spikes in the center of it." +
+            " Wouldn't want to fall on them.");
+       
+        itemsToAdd.add(new Item("pillow","soft pillow perfect for landing on", 3));
+        itemsToAdd.add(new Item("key","this key is used for a door", 1));
+        pillowKeyRoom = new Room("Pillow Room", "This room has a pedistool with a pillow on it",
+            new ItemStorage(itemsToAdd));
         itemsToAdd = new ArrayList<Item>();
         
-        pub = new Room("in the campus pub");
+        northStair = new Room("Northern Stair Well", "This doesn't really have much in it, " +
+             "best to move forward");
+        lockedDoor = new Room("Locked Door Room","This room has a locked door in it, " +
+            "I probably need a key to get through");
         
+        itemsToAdd.add(new Item("Sword","this new sword is expertly crafted. "
+            + "Appears sharp enough to slay a dragon or something...",10));
+        armory = new Room("Armory","This room appears to be an armory." + 
+            "There would appear to be a sword finished on the table", new ItemStorage(itemsToAdd));
         itemsToAdd = new ArrayList<Item>();
         
-        lab = new Room("in a computing lab");
+        dragoFight = new Room("Dragon nest", "This room has a large dragon sleeping in the middle" 
+            + "I bed I could use a sword to defeat him");
+        treasureRoom = new Room("Treasure Room", "This room is filled with treasures beyond my wildest delight");
         
-        itemsToAdd = new ArrayList<Item>();
         
-        office = new Room("in the computing admin office");
+        
+        
+        
+        
         
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
+        outside.setExit("east", atrium);
+        
+        atrium.setExit("west", outside);
+        atrium.setExit("north", grandHall);
+        atrium.setExit("east", southStair);
+        
+        floorLanding.setExit("west", southStair);
+        floorLanding.setExit("north", cubeRoom);
+        
+        grandHall.setExit("south", atrium);
+        grandHall.setExit("west", heavyButton);
+        grandHall.setExit("east", pillowRoom);
+        
+        cubeRoom.setExit("south", floorLanding);
+        cubeRoom.setExit("west", pillowRoom);
+        
+        pillowRoom.setExit("west", grandHall);
+        pillowRoom.setExit("north", spikeRoom);
+        
+        spikeRoom.setExit("south", pillowRoom);
+        spikeRoom.setExit("west", pillowKeyRoom);
+        spikeRoom.setExit("north", northStair);
+        
+        pillowKeyRoom.setExit("east", spikeRoom);
+        
+        northStair.setExit("south", spikeRoom);
+        northStair.setExit("east", lockedDoor);
+        
+        lockedDoor.setExit("west", northStair);
+        lockedDoor.setExit("south", armory);
+        
+        armory.setExit("north", lockedDoor);
+        armory.setExit("west", pillowKeyRoom);
+        
+        heavyButton.setExit("east", grandHall);
+        heavyButton.setExit("north", dragoFight);
+        
+        dragoFight.setExit("south", heavyButton);
+        dragoFight.setExit("north", treasureRoom);
+        
+        treasureRoom.setExit("south", dragoFight);
+        
+        
 
         currentRoom = outside;  // start game outside
     }
