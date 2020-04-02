@@ -104,7 +104,6 @@ public class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
-            
         }
         System.out.println("Thank you for playing!"); 
         System.out.println("Either you wanted to quit, or your time is up.");
@@ -134,8 +133,8 @@ public class Game
         boolean wantToQuit = false;
         
         finish = System.currentTimeMillis();
-        if(start+6000000 >= finish) {
-            return false;
+        if(start + 600000 <= finish) {
+            return true;
         }
         
         CommandWord commandWord = command.getCommandWord();
