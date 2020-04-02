@@ -2,10 +2,10 @@
 import java.util.ArrayList;
 
 /**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
+ *  
+ *  
+ *  
+ *  
  * 
  *  To play this game, create an instance of this class and call the "play"
  *  method.
@@ -71,14 +71,19 @@ public class Game
         southStair = new Room("Southern Stair Well", "There isn't anything too " 
                 + "special here, maybe some stairs i guess");
         floorLanding = new Room("Second floor landing", "Not really much in here");
-        cubeRoom = new Room("Cube Room", "This room had some sort of trap door to the left, but "
-        + " in the center there is pedistool with something on it");
-        grandHall = new Room("Grand Hall", "This room is quite grand, it appears that there are doors to the left and right");
         
         itemsToAdd.add(new Item("Cube", "This cube is heavier than expected", 25));
-        heavyButton = new Room("Button Room", "This room appears to have a button in the center of it."
-            + " I wonder what would happen if you put something on it", new ItemStorage(itemsToAdd));
+        cubeRoom = new Room("Cube Room", "This room had some sort of trap door to the left, but "
+        + " in the center there is pedistool with something on it", new ItemStorage(itemsToAdd));
         itemsToAdd = new ArrayList<Item>();
+        
+        
+        grandHall = new Room("Grand Hall", "This room is quite grand, it appears that there are doors to the left and right");
+        
+        
+        heavyButton = new Room("Button Room", "This room appears to have a button in the center of it."
+            + " I wonder what would happen if you put something on it");
+        
         
         pillowRoom = new Room("Pillow Room", "This room is is filled with large soft pillows");
         spikeRoom = new Room("Spike Room", "This room has a spikes in the center of it." +
@@ -118,6 +123,9 @@ public class Game
         atrium.setExit("north", grandHall);
         atrium.setExit("east", southStair);
         
+        southStair.setExit("west", atrium);
+        southStair.setExit("east", floorLanding);
+        
         floorLanding.setExit("west", southStair);
         floorLanding.setExit("north", cubeRoom);
         
@@ -144,7 +152,7 @@ public class Game
         lockedDoor.setExit("south", armory);
         
         armory.setExit("north", lockedDoor);
-        armory.setExit("west", pillowKeyRoom);
+        armory.setExit("west", spikeRoom);
         
         heavyButton.setExit("east", grandHall);
         heavyButton.setExit("north", dragoFight);
