@@ -6,9 +6,6 @@ import java.util.ArrayList;
 /**
  * Class Room - a room in an adventure game.
  *
- * 
- * 
- *
  * A "Room" represents one location in the scenery of the game.  It is 
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
@@ -54,6 +51,7 @@ public class Room
         items = itemsToAdd;
         name = nameOf;
     }
+    
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -69,17 +67,6 @@ public class Room
         name = nameOf;
         items = new ItemStorage();
     }
-    // /**
-     // * This will add an item to the array list of the 
-     // * 
-     // */
-    // public void addItem(Item item)
-    // {
-        // items.addItem(item);
-    // }
-    
-    
-    
     
     /**
      * Returns name of room.
@@ -132,8 +119,8 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n"
-               + itemList() + ".\n" 
+        return "\nYou are " + description + "\n"
+               + itemList() + "\n" 
                + getExitString();
     }
 
@@ -144,9 +131,15 @@ public class Room
      */
     public String itemList() {
         String itemsInside = "Items here:";
+        
         for(Item item : items.getItems()) {
             itemsInside = itemsInside + " " + item.getName() ;
         }
+        
+        if(itemsInside.equals("Items here:")) {
+            itemsInside = "Items here: none";
+        }
+        
         return itemsInside;
     }
     

@@ -2,11 +2,6 @@
 import java.util.ArrayList;
 
 /**
- *  
- *  
- *  
- *  
- * 
  *  To play this game, create an instance of this class and call the "play"
  *  method.
  * 
@@ -25,6 +20,12 @@ public class Game
     private Player player;
     private long start;
     private long finish;
+    private boolean wantToQuit;
+    
+    private Room outside, atrium, southStair, floorLanding, cubeRoom, grandHall, heavyButton;
+    private Room pillowRoom, spikeRoom, pillowKeyRoom, northStair, lockedDoor, armory;
+    private Room dragonFight, treasureRoom;
+        
         
     /**
      * Create the game and initialise its internal map.
@@ -51,73 +52,91 @@ public class Game
      */
     private void createRooms()
     {
-        //Room theater, pub, lab, office;
-        
-        
-        Room outside, atrium, southStair, floorLanding, cubeRoom, grandHall, heavyButton;
-        Room pillowRoom, spikeRoom, pillowKeyRoom, northStair,lockedDoor, armory;
-        Room dragoFight, treasureRoom;
-        
         ArrayList<Item> itemsToAdd = new ArrayList<Item>();
         
-        //itemsToAdd.add(new Item("beans", "can of beans yum yum", 5));
+        outside = new Room("Outside", "outside the main entrance of the dungeon.\n" +
+                            "To the east is a stone archway leading into an atrium.");
         
-        outside = new Room("Outside", "outside the main entrance of the" + 
-                           " dungeon.");
-        //itemsToAdd = new ArrayList<Item>();
+        atrium = new Room("Atrium", "inside the atrium.\n"+
+                            "You see a stairwell to the east and the Grand Hall to the north. \n"+
+                            "To your west is the stone archway leading outside.\n");
         
-        atrium = new Room("Atrium", "Inside the dungeon you see a stairwell and a grand hall.");
+        southStair = new Room("Southern Stair Well", "in the Southern Stairwell. \n"+
+                            "East will lead you up the stairs, and west will bring you to the \n"+
+                            "atrium.\n");
+                            
+        floorLanding = new Room("Second floor landing", "at the top of the south stairs. \n"+
+                            "There is a room to the north, and west will bring you down the stairs. \n");
         
-        southStair = new Room("Southern Stair Well", "There isn't anything too " 
-                + "special here, maybe some stairs i guess");
-        floorLanding = new Room("Second floor landing", "Not really much in here");
+        itemsToAdd.add(new Item("cube", "This is a large, stone cube. It's very heavy. \n", 25));
+        cubeRoom = new Room("Cube Room", "in a room.\n"+
+                            "The floor has a hole in the west, leading down to a room filled with \n"+
+                            "pillows, and an exit in the south. There is a large pedestal in the \n"+
+                            "center. \n", new ItemStorage(itemsToAdd));
         
-        itemsToAdd.add(new Item("Cube", "This cube is heavier than expected", 25));
-        cubeRoom = new Room("Cube Room", "This room had some sort of trap door to the left, but "
-        + " in the center there is pedistool with something on it", new ItemStorage(itemsToAdd));
         itemsToAdd = new ArrayList<Item>();
+        grandHall = new Room("Grand Hall", "in the Grand Hall. \n" + 
+                            "A door to the west leads to a room with a large button, and a door \n"+
+                            "to the east goes to a room filled with pillows. The Atrium is south \n"+
+                            "of you. \n");
+        
+        heavyButton = new Room("Button Room", "in a room with a large button in the center of it. \n"+
+                                "The Grand Hall is to the east, and there is a heavy door to the \n"+
+                                "north. You wonder what would happen if you weighed the button down. \n");
         
         
-        grandHall = new Room("Grand Hall", "This room is quite grand, it appears that there are doors to the left and right");
+        pillowRoom = new Room("Pillow Room", "in a room filled with large soft pillows, and a hole \n"+
+                            "in the ceiling. The Grand Hall is to your west, and there is a room \n"+
+                            "with some spikes on the floor to the north. \n");
         
-        
-        heavyButton = new Room("Button Room", "This room appears to have a button in the center of it."
-            + " I wonder what would happen if you put something on it");
-        
-        
-        pillowRoom = new Room("Pillow Room", "This room is is filled with large soft pillows");
-        spikeRoom = new Room("Spike Room", "This room has a spikes in the center of it." +
-            " Wouldn't want to fall on them.");
+        spikeRoom = new Room("Spike Room", "in a room with spikes on the floor, underneath a hole \n"+
+                            "in the ceiling. There is a room filled with pillows to the south, a \n"+
+                            "room with a pedestal to the west, and a stairwell to the north. \n");
        
-        itemsToAdd.add(new Item("pillow","soft pillow perfect for landing on", 3));
-        itemsToAdd.add(new Item("key","this key is used for a door", 1));
-        pillowKeyRoom = new Room("Pillow Room", "This room has a pedistool with a pillow on it",
-            new ItemStorage(itemsToAdd));
+        itemsToAdd.add(new Item("pillow","A giant, soft, pillow. Perfect for cushioning a fall. \n", 3));
+        itemsToAdd.add(new Item("key","This hefty key is used on a similar-sized lock. \n", 1));
+        pillowKeyRoom = new Room("Pillow Room", "in a room with a pedestal in the center. \n"+
+                            "The spiked room is to your east. \n",new ItemStorage(itemsToAdd));
+                            
         itemsToAdd = new ArrayList<Item>();
+        northStair = new Room("Northern Stair Well", "in the Northern Stairwell. \n"+
+                            "East will bring you up the stairs, and the spiked room is to the \n"+
+                            "south. \n");
+                            
+        lockedDoor = new Room("Locked Room","at the top of the Northern Stairwell. \n"+
+                            "West will bring you down the stairs, and the door to the south has \n"+
+                            "a hefty lock on it. \n");
         
-        northStair = new Room("Northern Stair Well", "This doesn't really have much in it, " +
-             "best to move forward");
-        lockedDoor = new Room("Locked Door Room","This room has a locked door in it, " +
-            "I probably need a key to get through");
-        
-        itemsToAdd.add(new Item("Sword","this new sword is expertly crafted. "
-            + "Appears sharp enough to slay a dragon or something...",10));
-        armory = new Room("Armory","This room appears to be an armory." + 
-            "There would appear to be a sword finished on the table", new ItemStorage(itemsToAdd));
+        itemsToAdd.add(new Item("sword","The hilt of this sword fits perfectly into your hand, and \n"+
+                            "the blade glows blue as you hold it. \n",3));
+        armory = new Room("Armory","in an armory, complete with anvil and hammers. \n" + 
+                            "In the center of the room sits an elegantly crafted sword stand. \n"+
+                            "The floor has a hole in the west, leading down to a room filled with \n"+
+                            "spikes. The top of the stairs is to the north. \n", new ItemStorage(itemsToAdd));
+                            
         itemsToAdd = new ArrayList<Item>();
-        
-        dragoFight = new Room("Dragon nest", "This room has a large dragon sleeping in the middle" 
-            + "I bed I could use a sword to defeat him");
-        treasureRoom = new Room("Treasure Room", "This room is filled with treasures beyond my wildest delight");
-        
-        
-        
-        
-        
-        
+        dragonFight = new Room("Dragon Room", "in a Dragon's Lair. \n"+
+                            "A great crimson beast slumbers atop a pile of bones. There is an ornate, \n"+
+                            "golden door on the north wall. You need be careful, so you don't get \n"+
+                            "killed! \n");
+            
+        treasureRoom = new Room("Treasure Room", "\nYou are in a room, surrounded with treasures beyond your wildest delight! \n"+
+                            "Surrounding you are piles of gold, chests filled with gems and \n"+
+                            "jewelery, and ornate artifacts. You step in, to admire it all, and- \n"+
+                            "wait, what? Did the door just close?\n"+
+                            "\n"+
+                            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"+
+                            "\n"+
+                            "Congratulations! You have completed the game.\n"+
+                            "Remember to go outside in real life, and drink some water. \n"+
+                            "\n"+
+                            "Thanks for playing!\n"+
+                            "\n"+
+                            "-Ryan Canuel and Tom O'Rourke");
         
         // initialise room exits
         outside.setExit("east", atrium);
+        //outside.setExit("south", treasureRoom); //only for playtesting purposes
         
         atrium.setExit("west", outside);
         atrium.setExit("north", grandHall);
@@ -149,21 +168,16 @@ public class Game
         northStair.setExit("east", lockedDoor);
         
         lockedDoor.setExit("west", northStair);
-        lockedDoor.setExit("south", armory);
         
         armory.setExit("north", lockedDoor);
         armory.setExit("west", spikeRoom);
         
         heavyButton.setExit("east", grandHall);
-        heavyButton.setExit("north", dragoFight);
         
-        dragoFight.setExit("south", heavyButton);
-        dragoFight.setExit("north", treasureRoom);
+        dragonFight.setExit("south", heavyButton);
         
-        treasureRoom.setExit("south", dragoFight);
+        treasureRoom.setExit("south", dragonFight);
         
-        
-
         currentRoom = outside;  // start game outside
     }
 
@@ -173,18 +187,12 @@ public class Game
     public void play() 
     {            
         printWelcome();
-
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-                
+     
         boolean finished = false;
-        while (! finished) {
+        while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing!"); 
-        System.out.println("Either you wanted to quit, or your time is up.");
-        System.out.println("Good bye.");
     }
     
     /**
@@ -203,8 +211,11 @@ public class Game
         System.out.println("have ten minutes to complete this or else the Dungeon's cursed halls ");
         System.out.println("wil devour your soul eternally. Have fun!");
         System.out.println();
-        System.out.println();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println(currentRoom.getLongDescription());
+        System.out.println();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println();
     }
 
     /**
@@ -215,10 +226,13 @@ public class Game
      */
     private boolean processCommand(Command command) 
     {
-        boolean wantToQuit = false;
+        wantToQuit = false;
         
         finish = System.currentTimeMillis();
         if(start + 600000 <= finish) {
+            System.out.println("\n" + "You begin to collapse. The Dungeon's Curse is getting to you.\n"+
+                                "Your time is up.\n"+
+                                "Thanks for playing! Goodbye.\n");
             return true;
         }
         
@@ -226,7 +240,7 @@ public class Game
 
         switch (commandWord) {
             case UNKNOWN:
-                System.out.println("I don't know what you mean...");
+                System.out.println("\n" + "I don't know what you mean...");
                 break;
 
             case HELP:
@@ -254,6 +268,11 @@ public class Game
                 break;
 
         }
+        
+        System.out.println();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println();
+        
         return wantToQuit;
     }
 
@@ -266,7 +285,7 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
+        System.out.println("\n" + "You are lost. You are alone. You wander ");
         System.out.println("around the dungeon.");
         System.out.println();
         System.out.println("Your command words are:");
@@ -282,16 +301,30 @@ public class Game
      * Sword in Dragon Room
      */
     public void useItem(String item) {
-        if(currentRoom.equals("spike room") && player.searchFor("pillow") != null) {
-            //yadda yadda yadda
-        } else if(currentRoom.equals("locked room") && player.searchFor("key") != null) {
-            //yadda yadda yadda
-        } else if(currentRoom.equals("button room") && player.searchFor("cube") != null) {
-            //yadda yadda yadda
-        } else if(currentRoom.equals("dragon lair") && player.searchFor("sword") != null) {
-            //yadda yadda yadda
+        if(currentRoom.getName().equals("Spike Room") && player.searchFor("pillow") != null) {
+            armory.setExit("west", spikeRoom); //first, connect rooms
+            System.out.println("\n" + "You place the pillow over the spikes. It should be safe to land on, now.");//then, print flavor text
+        } else if(currentRoom.getName().equals("Locked Room") && player.searchFor("key") != null) {
+            lockedDoor.setExit("south", armory);
+            System.out.println("\n" + "You unlock the lock with the matching key. \n"+
+                                "Now, you can enter through the door.");
+        } else if(currentRoom.getName().equals("Button Room") && player.searchFor("cube") != null) {
+            heavyButton.setExit("north", dragonFight);
+            System.out.println("\n" + "You place the cube on the button, and the north door opens.");
+        } else if(currentRoom.getName().equals("Dragon Room") && player.searchFor("sword") != null) {
+            dragonFight.setExit("north", treasureRoom);
+            System.out.println("\n" + "You silently creep towards the sleeping dragon. Your heart \n"+
+                                "pounds in your chest, and a nervous sweat rolls down your brow.\n\n"+
+                                "As you approach, you can feel the warmth of each of the dragon's \n"+
+                                "exhalations, and smell the musty stench of it's breath.\n\n"+
+                                "Slowly, you come closer to the beast, and you raise the gleaming \n"+
+                                "blade above your head, grasping it with both hands- and with one \n"+
+                                "mighty swing, you plunge it into the dragon's skull. The sword's \n"+
+                                "light flickers and slowly fades, as the dragon ceases moving.\n\n"+
+                                "You have slain a dragon.\n"+
+                                "You can now go through the golden door in the north.");
         } else {
-            System.out.println("nope, cant use this here, buckaroo");
+            System.out.println("\n" + "You cannot use this here.");
         }
         
     }
@@ -315,11 +348,11 @@ public class Game
     {
         Item item = player.searchFor(target);
         if(item == null) {
-            System.out.println("I can't seem to find the item you want to take.");
+            System.out.println("\nI can't seem to find the item you want to take.");
         } else {
             currentRoom.getItemStorage().getItems().remove(item);
             player.getItemStorage().getItems().add(item);
-            System.out.println(item.getName() + " has been added to your inventory.");
+            System.out.println("\nThe " + item.getName() + " has been added to your inventory.");
         }
     }
     
@@ -331,7 +364,7 @@ public class Game
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
+            System.out.println("\n" + "Go where?");
             return;
         }
 
@@ -341,9 +374,12 @@ public class Game
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
+            System.out.println("\n" + "You can't go that way.");
+        } else if(nextRoom.getName().equals("Treasure Room")) {
+            currentRoom = nextRoom;
+            System.out.println(currentRoom.getDescription());
+            wantToQuit = true;
+        }else {
             currentRoom = nextRoom;
             player.setCurrentRoom(currentRoom);
             System.out.println(currentRoom.getLongDescription());
@@ -358,10 +394,13 @@ public class Game
     private boolean quit(Command command) 
     {
         if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            System.out.println("\n" + "If you want to exit the game, just type \"quit.\"");
             return false;
         }
         else {
+            System.out.println("Thanks for playing! \n"+
+                                "Hope you come back to finish the game later. \n"+
+                                "Bye!");
             return true;  // signal that we want to quit
         }
     }
