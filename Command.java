@@ -1,7 +1,4 @@
 /**
- * 
- * 
- *
  * This class holds information about a command that was issued by the user.
  * A command currently consists of two parts: a CommandWord and a string
  * (for example, if the command was "take map", then the two parts

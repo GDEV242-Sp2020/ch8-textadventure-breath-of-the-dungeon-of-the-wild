@@ -2,10 +2,11 @@ import java.util.ArrayList;
 
 
 /**
- * The player of the game. Has an inventory.
+ * The player class outlines the player of the game. 
+ * The human playing the game controls the player.
  *
  * @author Ryan Canuel, Tom o'Rourke
- * @version 1.0.0
+ * @version 2020
  */
 public class Player
 {
@@ -39,7 +40,7 @@ public class Player
     }
     
     /**
-     * search for an item that either the player has or it is in the room
+     * Search for an item that either the player has or is in the room
      * @param itemName The name of the item
      */
     public Item searchFor(String itemName) {
@@ -60,7 +61,7 @@ public class Player
     /**
      * Searches through player's inventory, room's items, and room itself,
      * to try to look at something.
-     * @param target this is the target of what the player is tryin to look at
+     * @param target the target of what the player is trying to look at
      */
     public String lookAt(String target)
     {
@@ -84,7 +85,7 @@ public class Player
     }
     
     /**
-     * Returns items in iinventory as a printable string.
+     * Returns items in inventory as a printable string.
      * @return itemsInside string names of items inside
      */
     public String itemList() {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
+ * @author  Michael Kölling and David J. Barnes, edited by Ryan Canuel and Tom O'Rourke
  * @version 2016.02.29
  */
 
@@ -280,7 +280,7 @@ public class Game
 
     /**
      * Print out some help information.
-     * Here we print some stupid, cryptic message and a list of the 
+     * Here we print some silly, cryptic message and a list of the 
      * command words.
      */
     private void printHelp() 
@@ -331,7 +331,7 @@ public class Game
     
 
     /**
-     * Look command. Gives player information about an room, item, or enemy.
+     * Look command. Gives player information about an room, item, or their inventory.
      */
     public void lookAt(String target) {
         if(target == null) {

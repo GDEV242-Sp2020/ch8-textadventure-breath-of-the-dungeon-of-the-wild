@@ -4,14 +4,14 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 /**
- * Class Room - a room in an adventure game.
+ * the Room class- a room in an adventure game.
  *
  * A "Room" represents one location in the scenery of the game.  It is 
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
- * @author  
- * @version 2016.02.29
+ * @author  Ryan Canuel and Tom O'Rourke
+ * @version 2020
  */
 
 public class Room 
@@ -114,6 +114,9 @@ public class Room
     /**
      * Return a description of the room in the form:
      *     You are in the kitchen.
+     *     The dining room is to the north, and the hallway is to the west.
+     *     
+     *     Items: pumpkin
      *     Exits: north west
      * @return A long description of this room
      */

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 /**
  *  Universal inventory of items for rooms and players.
  *
- * @author Ryan and tom
- * @version 1
+ * @author Ryan Canuel and Tom O'Rourke
+ * @version 2020
  */
 public class ItemStorage
 {

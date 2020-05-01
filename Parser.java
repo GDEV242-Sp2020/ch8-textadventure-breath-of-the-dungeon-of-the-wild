@@ -1,9 +1,6 @@
 import java.util.Scanner;
 
 /**
- * 
- * 
- * 
  * This parser reads user input and tries to interpret it as an "Adventure"
  * command. Every time it is called it reads a line from the terminal and
  * tries to interpret the line as a two-word command. It returns the command
